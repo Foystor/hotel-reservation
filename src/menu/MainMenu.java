@@ -44,7 +44,7 @@ public class MainMenu {
                     case 3 -> {
                         System.out.println("Create an account");
                         keepRunning = false;
-                        //createAccount();
+                        createAccount();
                         // back to the main menu
                         printMainMenu();
                     }
@@ -63,5 +63,38 @@ public class MainMenu {
                 System.out.println("Invalid input: " + ex.getMessage());
             }
         }
+    }
+
+
+    /**
+     * create an account
+     * @return email
+     */
+    public String createAccount() {
+        boolean keepRunning = true;
+        String email = null;
+
+        while (keepRunning) {
+            try {
+                System.out.println("Enter first name");
+                String firstName = scanner.nextLine();
+                System.out.println("Enter last name");
+                String lastName = scanner.nextLine();
+                System.out.println("Enter Email format: name@domain.com");
+                email = scanner.nextLine();
+
+                // check if the email already exists
+                if (adminResource.getCustomer(email) != null) {
+                    throw new IllegalArgumentException("Duplicate email!");
+                } else {
+                    hotelResource.createACustomer(email, firstName, lastName);
+                }
+
+                keepRunning = false;
+            } catch (Exception ex) {
+                System.out.println("Invalid input: " + ex.getMessage());
+            }
+        }
+        return email;
     }
 }
