@@ -1,5 +1,7 @@
 package model;
 
+import util.Catcher;
+
 import java.util.Objects;
 
 public class Customer {
@@ -9,6 +11,9 @@ public class Customer {
     private final String email;
 
     public Customer(String firstName, String lastName, String email) {
+        // validate the email
+        Catcher.validateEmail(email);
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
