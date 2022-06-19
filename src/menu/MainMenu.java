@@ -58,7 +58,7 @@ public class MainMenu {
                     case 4 -> {
                         System.out.println("Admin menu");
                         keepRunning = false;
-                        //new AdminMenu().printAdminMenu();
+                        new AdminMenu().printAdminMenu();
                     }
                     case 5 -> {
                         keepRunning = false;
