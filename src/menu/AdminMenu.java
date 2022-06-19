@@ -47,7 +47,7 @@ public class AdminMenu {
                     case 3 -> {
                         System.out.println("See all Reservations");
                         keepRunning = false;
-                        //seeAllReservation();
+                        seeAllReservation();
                     }
                     case 4 -> {
                         System.out.println("Add a Room");
@@ -100,6 +100,16 @@ public class AdminMenu {
         } else {
             System.out.println("None");
         }
+        // back to the admin menu
+        printAdminMenu();
+    }
+
+
+    /**
+     * print out all the reservation
+     */
+    public void seeAllReservation() {
+        adminResource.displayAllReservations();
         // back to the admin menu
         printAdminMenu();
     }
