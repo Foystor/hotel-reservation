@@ -2,7 +2,10 @@ package menu;
 
 import api.AdminResource;
 import api.HotelResource;
+import model.Reservation;
+import util.Catcher;
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -39,7 +42,7 @@ public class MainMenu {
                     case 2 -> {
                         System.out.println("See my reservation");
                         keepRunning = false;
-                        //seeMyReservation();
+                        seeMyReservation();
                     }
                     case 3 -> {
                         System.out.println("Create an account");
@@ -59,6 +62,38 @@ public class MainMenu {
                     }
                     default -> System.out.println("Please enter a number between 1 and 5");
                 }
+            } catch (Exception ex) {
+                System.out.println("Invalid input: " + ex.getMessage());
+            }
+        }
+    }
+
+
+    /**
+     * print out all my reservations
+     */
+    public void seeMyReservation() {
+        boolean keepRunning = true;
+
+        while (keepRunning) {
+            try {
+                System.out.println("Enter Email format: name@domain.com");
+                String email = scanner.nextLine();
+                // validate the email
+                Catcher.validateEmail(email);
+                Collection<Reservation> myReservations = hotelResource.getCustomersReservations(email);
+
+                if (myReservations != null && myReservations.size() > 0) {
+                    for (Reservation reservation : myReservations) {
+                        System.out.println(reservation);
+                        System.out.println();
+                    }
+                } else {
+                    System.out.println("None");
+                }
+                keepRunning = false;
+                // back to the main menu
+                printMainMenu();
             } catch (Exception ex) {
                 System.out.println("Invalid input: " + ex.getMessage());
             }
