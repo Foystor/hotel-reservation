@@ -20,4 +20,19 @@ public class Catcher {
             throw new IllegalArgumentException("Please enter the correct email");
         }
     }
+
+
+    /**
+     * validate a date,the year must be 2022
+     * @param date string of the date input
+     */
+    public static void validateDate(String date) {
+        String dateRegEx = "^(\\d{2})/(\\d{2})/2022$";
+        Pattern datePattern = Pattern.compile(dateRegEx);
+        Matcher dateMatcher = datePattern.matcher(date);
+
+        if (!dateMatcher.matches()) {
+            throw new IllegalArgumentException("Please enter the correct date");
+        }
+    }
 }
