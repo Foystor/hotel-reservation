@@ -3,6 +3,7 @@ package menu;
 import api.AdminResource;
 import api.HotelResource;
 import model.Customer;
+import model.IRoom;
 
 import java.util.Collection;
 import java.util.Scanner;
@@ -41,7 +42,7 @@ public class AdminMenu {
                     case 2 -> {
                         System.out.println("See all Rooms");
                         keepRunning = false;
-                        //seeAllRooms();
+                        seeAllRooms();
                     }
                     case 3 -> {
                         System.out.println("See all Reservations");
@@ -77,6 +78,24 @@ public class AdminMenu {
         if (customers != null && customers.size() > 0) {
             for (Customer customer : customers) {
                 System.out.println(customer.toString());
+            }
+        } else {
+            System.out.println("None");
+        }
+        // back to the admin menu
+        printAdminMenu();
+    }
+
+
+    /**
+     * print out all the rooms
+     */
+    public void seeAllRooms() {
+        Collection<IRoom> rooms = adminResource.getAllRooms();
+
+        if (rooms != null && rooms.size() > 0) {
+            for (IRoom room : rooms) {
+                System.out.println(room.toString());
             }
         } else {
             System.out.println("None");
